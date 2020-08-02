@@ -1,0 +1,87 @@
+
+/* Class = "UILabel"; text = "Введен неверный пароль"; ObjectID = "1EA-kG-x7R"; */
+"1EA-kG-x7R.text" = "Введен неверный пароль";
+
+/* Class = "UITextField"; placeholder = "введите ваш email"; ObjectID = "4Tg-UB-qSQ"; */
+"4Tg-UB-qSQ.placeholder" = "введите ваш email";
+
+/* Class = "UILabel"; text = "Восстановление пароля"; ObjectID = "5Vp-Uz-EkZ"; */
+"5Vp-Uz-EkZ.text" = "Восстановление пароля";
+
+/* Class = "UILabel"; text = "Авторизация"; ObjectID = "6XM-mr-Mxq"; */
+"6XM-mr-Mxq.text" = "Авторизация";
+
+/* Class = "UILabel"; text = "Укажите электронный адрес на который будет выслана инструкция по восстановлению пароля"; ObjectID = "7oO-PP-TqK"; */
+"7oO-PP-TqK.text" = "Укажите электронный адрес на который будет выслана инструкция по восстановлению пароля";
+
+/* Class = "UILabel"; text = "Пароль"; ObjectID = "8S7-MQ-PQg"; */
+"8S7-MQ-PQg.text" = "Пароль";
+
+/* Class = "UITextField"; placeholder = "введите ваш email"; ObjectID = "9Qj-QD-s8u"; */
+"9Qj-QD-s8u.placeholder" = "введите ваш email";
+
+/* Class = "UITextField"; placeholder = "введите пароль"; ObjectID = "9v0-M2-p1Q"; */
+"9v0-M2-p1Q.placeholder" = "введите пароль";
+
+/* Class = "UILabel"; text = "Регистрация"; ObjectID = "Bq9-HF-bWa"; */
+"Bq9-HF-bWa.text" = "Регистрация";
+
+/* Class = "UILabel"; text = "Укажите Email"; ObjectID = "BzE-FW-Cdq"; */
+"BzE-FW-Cdq.text" = "Укажите Email";
+
+/* Class = "UILabel"; text = "Введен неверный Email"; ObjectID = "H2g-mH-Bse"; */
+"H2g-mH-Bse.text" = "Введен неверный Email";
+
+/* Class = "UIButton"; normalTitle = "Восстановить пароль"; ObjectID = "Hr9-0i-Dbb"; */
+"Hr9-0i-Dbb.normalTitle" = "Восстановить пароль";
+
+/* Class = "UIButton"; normalTitle = "Забыли пароль?"; ObjectID = "IUg-6r-cPK"; */
+"IUg-6r-cPK.normalTitle" = "Забыли пароль?";
+
+/* Class = "UILabel"; text = "Email"; ObjectID = "JwG-IB-dtV"; */
+"JwG-IB-dtV.text" = "Email";
+
+/* Class = "UILabel"; text = "Email"; ObjectID = "PeM-os-nBw"; */
+"PeM-os-nBw.text" = "Email";
+
+/* Class = "UITextField"; placeholder = "введите имя"; ObjectID = "Tva-ge-4Sd"; */
+"Tva-ge-4Sd.placeholder" = "введите имя";
+
+/* Class = "UIButton"; normalTitle = "Войти"; ObjectID = "V9Y-fB-UbQ"; */
+"V9Y-fB-UbQ.normalTitle" = "Войти";
+
+/* Class = "UILabel"; text = "Имя"; ObjectID = "VzG-3l-cQt"; */
+"VzG-3l-cQt.text" = "Имя";
+
+/* Class = "UITextField"; placeholder = "введите пароль"; ObjectID = "Y91-TC-V7U"; */
+"Y91-TC-V7U.placeholder" = "введите пароль";
+
+/* Class = "UIButton"; normalTitle = "Зарегистрироваться"; ObjectID = "Zsh-Rf-8LH"; */
+"Zsh-Rf-8LH.normalTitle" = "Зарегистрироваться";
+
+/* Class = "UITextField"; placeholder = "введите ваш email"; ObjectID = "clE-Q0-zav"; */
+"clE-Q0-zav.placeholder" = "введите ваш email";
+
+/* Class = "UIButton"; normalTitle = "У вас уже есть аккаунт?"; ObjectID = "eWk-UZ-8Yv"; */
+"eWk-UZ-8Yv.normalTitle" = "У вас уже есть аккаунт?";
+
+/* Class = "UILabel"; text = "Нажимая кнопку «Зарегистрироваться» вы соглашаетесь с Пользовательским соглашением и Политикой обработки персональных данных."; ObjectID = "fLp-OB-9GC"; */
+"fLp-OB-9GC.text" = "Нажимая кнопку «Зарегистрироваться» вы соглашаетесь с Пользовательским соглашением и Политикой обработки персональных данных.";
+
+/* Class = "UIButton"; normalTitle = "У вас нет аккаунта?"; ObjectID = "fi8-2B-WAL"; */
+"fi8-2B-WAL.normalTitle" = "У вас нет аккаунта?";
+
+/* Class = "UILabel"; text = "Введен некорректный пароль"; ObjectID = "gqj-4A-gWA"; */
+"gqj-4A-gWA.text" = "Введен некорректный пароль";
+
+/* Class = "UILabel"; text = "Введен неверный Email"; ObjectID = "j4W-79-Y7R"; */
+"j4W-79-Y7R.text" = "Введен неверный Email";
+
+/* Class = "UILabel"; text = "Пароль"; ObjectID = "k6H-Sk-qOr"; */
+"k6H-Sk-qOr.text" = "Пароль";
+
+/* Class = "UILabel"; text = "Введено некорректное имя"; ObjectID = "lgY-JQ-AkA"; */
+"lgY-JQ-AkA.text" = "Введено некорректное имя";
+
+/* Class = "UILabel"; text = "Email"; ObjectID = "t8z-eQ-LPG"; */
+"t8z-eQ-LPG.text" = "Email";
