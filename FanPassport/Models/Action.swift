@@ -26,15 +26,15 @@ class Action {
     
     init() {}
     
-    init(dictionary: [String: AnyObject]) {
+    init(dictionary: [String: Any]) {
         id = dictionary["id"] as? Int
         mtype = dictionary["mtype"] as? Int
         startdate = dictionary["startdate"] as? String
         enddate = dictionary["enddate"] as? String
         name = dictionary["name"] as? String
         descr = dictionary["descr"] as? String
-        lat = dictionary["lat"] as? Double
-        lon = dictionary["lon"] as? Double
+        lat = Double(dictionary["lat"] as? String ?? "0")
+        lon = Double(dictionary["lon"] as? String ?? "0")
         radius = dictionary["radius"] as? Int
         avatar = dictionary["avatar"] as? String
         totaltime = dictionary["totaltime"] as? Int

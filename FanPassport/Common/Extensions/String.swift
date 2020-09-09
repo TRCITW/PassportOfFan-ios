@@ -79,6 +79,12 @@ extension String {
         return date
     }
     
+    func toDate(format: String) ->Date? {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = format
+        return dateFormatter.date(from: self)
+    }
+    
     
     func toNormalMonthName() -> String? {
         let numberString = self.prefix(2)

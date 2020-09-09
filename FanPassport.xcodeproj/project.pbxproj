@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1D83EEB46AD00CDED4ECCAD7 /* libPods-FanPassport.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D8018A5B982E9A562E471921 /* libPods-FanPassport.a */; };
+		8E19CE282506A57B0021395B /* SBHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E19CE272506A57B0021395B /* SBHelper.swift */; };
 		DD32C14C23B9339600EA4DAE /* EventInfoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD32C14B23B9339600EA4DAE /* EventInfoController.swift */; };
 		DD32C15023B9388F00EA4DAE /* InfoAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD32C14E23B9388F00EA4DAE /* InfoAlertView.swift */; };
 		DD32C15123B9388F00EA4DAE /* InfoAlertView.xib in Resources */ = {isa = PBXBuildFile; fileRef = DD32C14F23B9388F00EA4DAE /* InfoAlertView.xib */; };
@@ -112,6 +113,7 @@
 
 /* Begin PBXFileReference section */
 		59C91D870A734A1540927DBD /* Pods-FanPassport.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FanPassport.release.xcconfig"; path = "Target Support Files/Pods-FanPassport/Pods-FanPassport.release.xcconfig"; sourceTree = "<group>"; };
+		8E19CE272506A57B0021395B /* SBHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SBHelper.swift; sourceTree = "<group>"; };
 		C5908D08CA0195C5BD365EE1 /* Pods-FanPassport.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FanPassport.debug.xcconfig"; path = "Target Support Files/Pods-FanPassport/Pods-FanPassport.debug.xcconfig"; sourceTree = "<group>"; };
 		D8018A5B982E9A562E471921 /* libPods-FanPassport.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-FanPassport.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DD32C14B23B9339600EA4DAE /* EventInfoController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventInfoController.swift; sourceTree = "<group>"; };
@@ -438,6 +440,7 @@
 				DDDD3DA3239E9D6F00C262DC /* SecondaryButton.swift */,
 				DDDD3DA4239E9D6F00C262DC /* Views */,
 				DDDD3DA8239E9D6F00C262DC /* DropDownButton.swift */,
+				8E19CE272506A57B0021395B /* SBHelper.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -712,6 +715,7 @@
 				DDDD3DAF239E9D6F00C262DC /* CardView.swift in Sources */,
 				DDA679BE23B4E17200649117 /* EventsTableCell.swift in Sources */,
 				DD8B92DD23C76C3E00AC61CB /* UserStatistic.swift in Sources */,
+				8E19CE282506A57B0021395B /* SBHelper.swift in Sources */,
 				DD32C15023B9388F00EA4DAE /* InfoAlertView.swift in Sources */,
 				DD8B92D923C75F7E00AC61CB /* Action.swift in Sources */,
 				DDDD3DAE239E9D6F00C262DC /* Structures.swift in Sources */,

@@ -90,7 +90,8 @@ class RecoveryController: AuthorisationBaseViewController {
         }
 
         if isCancel { return }
-        goToTabBar()
+//        goToTabBar()
+        recovery()
     }
     
     @IBAction func resendButtonAction(_ sender: UIButton) {

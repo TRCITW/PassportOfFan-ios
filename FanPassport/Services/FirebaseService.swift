@@ -17,7 +17,7 @@ class FirebaseAuthService {
     func authorization(with phone: String, completion: @escaping ((Bool, Error?) -> Void)) {
         if phone == GlobalConstants.testPhone {
             print("Test user authorization")
-            UserDefaults.standard.set(GlobalConstants.testPhone, forKey: UserKeys.phone)
+            UserDefaults.standard.set(GlobalConstants.testPhone.digits, forKey: UserKeys.phone)
             UserDefaults.standard.synchronize()
             completion(true, nil)
         } else {
@@ -29,7 +29,7 @@ class FirebaseAuthService {
                 }
                 
                 DispatchQueue.main.async {
-                    UserDefaults.standard.set(phone, forKey: UserKeys.phone)
+                    UserDefaults.standard.set(phone, forKey: UserKeys.phone.digits)
                     UserDefaults.standard.set(verificationID, forKey: UserKeys.verificationID)
                     UserDefaults.standard.synchronize()
                     completion(true, nil)
@@ -39,7 +39,7 @@ class FirebaseAuthService {
     }
     
     func codeValidate(code: String, completion: @escaping ((Bool) -> Void)) {
-        if UserDefaults.standard.string(forKey: UserKeys.phone) == GlobalConstants.testPhone && code == GlobalConstants.testCode {
+        if UserDefaults.standard.string(forKey: UserKeys.phone) == GlobalConstants.testPhone.digits && code == GlobalConstants.testCode {
             print("Test user code validate")
             UserDefaults.standard.set(GlobalConstants.testUID, forKey: UserKeys.firebaseUID)
             UserDefaults.standard.set(true, forKey: UserKeys.isLogged)

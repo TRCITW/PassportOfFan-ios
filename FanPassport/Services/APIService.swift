@@ -257,11 +257,16 @@ class APIService {
         reqParams["totaltime"] = totaltime.description
         reqParams["phone"] = UserDefaults.standard.string(forKey: UserKeys.phone)
         reqParams["imei"] = UserDefaults.standard.string(forKey: UserKeys.firebaseUID)
+        reqParams["token"] = UserDefaults.standard.string(forKey: UserKeys.firebaseUID)
 
         requestManager.request(baseUrlString + "load/",
-                               method: .get,
+                               method: .post,
                                parameters: reqParams,
                                headers: headers).validate().responseJSON { response in
+                                
+                                if let data = response.data, let str = String(data: data, encoding: .utf8){
+                                    print(str)
+                                }
 
                                 switch response.result {
                                 case .success(_):
@@ -399,7 +404,7 @@ class APIService {
     // Получение подробной информации о пользователе
     func getUser(completion: @escaping (Bool, ResponseError?)->()) {
 
-        requestManager.request(baseUrlString + "fun/" + UserDefaults.standard.integer(forKey: UserKeys.phone).description,
+        requestManager.request(baseUrlString + "fun/" + (UserDefaults.standard.object(forKey: UserKeys.phone) as? String ?? ""),
                                method: .get,
                                parameters: params,
                                headers: headers).validate().responseJSON { response in

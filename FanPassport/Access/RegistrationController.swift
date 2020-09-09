@@ -92,6 +92,10 @@ class RegistrationController: AuthorisationBaseViewController {
         }
     }
     
+    @IBAction func backAction(_ sender: UIButton) {
+        dismiss(animated: true)
+    }
+
     func policyConditionalLabelConfigure() {
         policyConditionalLabel.isUserInteractionEnabled = true
         policyConditionalLabel.textColor = .black
@@ -168,11 +172,12 @@ class RegistrationController: AuthorisationBaseViewController {
                             UserDefaults.standard.set(self.nameTextField.text, forKey: UserKeys.name)
                             UserDefaults.standard.set(self.fNameTextField.text, forKey: UserKeys.surname)
                             UserDefaults.standard.set(self.oNameTextField.text, forKey: UserKeys.secondName)
-                            UserDefaults.standard.set(self.phoneTextField.text, forKey: UserKeys.phone)
+                            UserDefaults.standard.set((self.phoneTextField.text ?? "").digits, forKey: UserKeys.phone)
                             UserDefaults.standard.synchronize()
                             let newVC = UIStoryboard(name: "Access", bundle: nil).instantiateViewController(withIdentifier: "RecoveryController") as! RecoveryController
                             newVC.isLoginAction = false
-                            self.navigationController?.show(newVC, sender: self)
+//                            self.navigationController?.show(newVC, sender: self)
+                            self.present(newVC, animated: true)
                         } else {
                             self.show(title: "Ошибка firebase", message: error.debugDescription)
                         }

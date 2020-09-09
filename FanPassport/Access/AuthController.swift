@@ -42,7 +42,8 @@ class AuthController: AuthorisationBaseViewController {
             self.hideProgressHUD()
             if result {
                 let newVC = UIStoryboard(name: "Access", bundle: nil).instantiateViewController(withIdentifier: "RecoveryController") as! RecoveryController
-                self.navigationController?.show(newVC, sender: self)
+                self.present(newVC, animated: true)
+//                self.navigationController?.show(newVC, sender: self)
             } else {
                 self.show(title: "Ошибка firebase", message: error.debugDescription)
             }
@@ -67,6 +68,10 @@ class AuthController: AuthorisationBaseViewController {
         let appdelegate = UIApplication.shared.delegate as! AppDelegate
         let newVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "TabBarController") as! MainTabBarController
         appdelegate.window!.rootViewController = newVC
+    }
+    
+    @IBAction func backAction(_ sender: Any) {
+        dismiss(animated: true)
     }
     
     @IBAction func loginButtonAction(_ sender: RedRoundedButton) {

@@ -47,9 +47,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         application.registerForRemoteNotifications()
         
         if UserDefaults.standard.string(forKey: UserKeys.firebaseUID) != nil {
-            let newVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "TabBarController") as! MainTabBarController
+            let newVC = SBHelper.Main.mainTabBar()
             newVC.isLoginAction = true
             window!.rootViewController = newVC
+        }else{
+            let vc = SBHelper.Auth.accessVC()
+            vc.modalPresentationStyle = .fullScreen
+            window!.rootViewController = vc
         }
         return true
     }

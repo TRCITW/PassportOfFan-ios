@@ -2,7 +2,7 @@ platform :ios, '10.0'
 use_modular_headers!
 
 def shared_pods
-    pod 'Alamofire'
+    pod 'Alamofire', '~> 4.9.1'
     pod 'AlamofireImage'
     pod 'AlamofireNetworkActivityIndicator'
     pod 'Firebase/Auth'
