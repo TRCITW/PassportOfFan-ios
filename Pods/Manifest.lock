@@ -82,6 +82,8 @@ PODS:
   - GoogleMaps/Base (3.8.0)
   - GoogleMaps/Maps (3.8.0):
     - GoogleMaps/Base
+  - GooglePlaces (3.8.0):
+    - GoogleMaps/Base (= 3.8.0)
   - GoogleUtilities/AppDelegateSwizzler (6.6.0):
     - GoogleUtilities/Environment
     - GoogleUtilities/Logger
@@ -120,6 +122,7 @@ DEPENDENCIES:
   - Firebase/Auth
   - Firebase/Messaging
   - GoogleMaps
+  - GooglePlaces
   - SwiftMaskTextfield (from `https://github.com/Twfik/swift-mask-textfield.git`)
 
 SPEC REPOS:
@@ -143,6 +146,7 @@ SPEC REPOS:
     - GoogleDataTransport
     - GoogleDataTransportCCTSupport
     - GoogleMaps
+    - GooglePlaces
     - GoogleUtilities
     - GTMSessionFetcher
     - nanopb
@@ -178,6 +182,7 @@ SPEC CHECKSUMS:
   GoogleDataTransport: 061fe7d9b476710e3cd8ea51e8e07d8b67c2b420
   GoogleDataTransportCCTSupport: 0f39025e8cf51f168711bd3fb773938d7e62ddb5
   GoogleMaps: 7c8d66d70e4e8c300f43a7219d8fdaad7b325a9a
+  GooglePlaces: d5f70c3e9e427964fdeca1301a665d276ccd8754
   GoogleUtilities: 39530bc0ad980530298e9c4af8549e991fd033b1
   GTMSessionFetcher: cea130bbfe5a7edc8d06d3f0d17288c32ffe9925
   nanopb: 18003b5e52dab79db540fe93fe9579f399bd1ccd
@@ -185,6 +190,6 @@ SPEC CHECKSUMS:
   Protobuf: 176220c526ad8bd09ab1fb40a978eac3fef665f7
   SwiftMaskTextfield: 6185c136c9d0ea451be5fdd064b2eb3ebda836e4
 
-PODFILE CHECKSUM: b71bac89077fa4b4e59f3c2deea53137eb24e354
+PODFILE CHECKSUM: 71472d2699bcca2df3e2fea0ffe31f779f464050
 
 COCOAPODS: 1.8.4

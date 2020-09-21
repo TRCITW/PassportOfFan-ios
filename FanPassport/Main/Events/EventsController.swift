@@ -8,6 +8,10 @@
 
 import UIKit
 
+enum FilterType {
+    case all, sport, NHL
+}
+
 class EventsController: BaseViewController {
     
     @IBOutlet weak var filter1Button: EventsFilterButton!
@@ -34,12 +38,22 @@ class EventsController: BaseViewController {
     var itemsSorted: [[Action]] = [[Action](), [Action](), [Action]()]
     var headers = ["СЕГОДНЯ", "ПРЕДСТОЯЩИЕ", "ПРОШЕДШИЕ"]
     var selectedButton = 0
+    var selectedType: FilterType = .all
+    
+    lazy var refreshControl: UIRefreshControl = {
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(handleRefresh), for: .valueChanged)
+        refreshControl.tintColor = UIColor.redRounded
+        
+        return refreshControl
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         UISettings()
         setupFilter()
         getItems()
+        tableView.addSubview(refreshControl)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -55,16 +69,17 @@ class EventsController: BaseViewController {
         emptyView.isHidden = true
     }
     
-    func getItems() {
+    func getItems(animation: Bool = false) {
         guard GlobalConstants.apiService.isInternetAvailable(vc: self) else {
             loadSavedActions(forUpdate: false)
             return
         }
-
-        
-        showProgressHUD()
+        if animation {
+            showProgressHUD()
+        }
         GlobalConstants.apiService.getActions() { result, data, error in
             self.hideProgressHUD()
+            self.refreshControl.endRefreshing()
             if result {
                 self.items = data ?? [Action]()
                 self.loadSavedActions(forUpdate: true)
@@ -80,18 +95,51 @@ class EventsController: BaseViewController {
         var today = [Action]()
         var future = [Action]()
         var other = [Action]()
-        for elem in self.itemsFiltered {
-            let date = Date.init(timeIntervalSince1970: TimeInterval(Double(elem.startdate ?? "0")!))
-            let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "dd.MM.yyyy"
-            if dateFormatter.string(from: date) == dateFormatter.string(from: Date()) {
-                today.append(elem)
-            } else if dateFormatter.string(from: date) > dateFormatter.string(from: Date()) {
-                future.append(elem)
-            }else {
-                other.append(elem)
-            }
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd.MM.yyyy"
+        let nowDate = Date()
+        itemsFiltered.sort { (act1, act2) -> Bool in
+            return (Double(act1.startdate ?? "0") ?? 0) > (Double(act2.startdate ?? "0") ?? 0)
         }
+        today = itemsFiltered.filter({ (act) -> Bool in
+            let startdate = Date.init(timeIntervalSince1970: TimeInterval(Double(act.startdate ?? "0")!))
+            return dateFormatter.string(from: nowDate) == dateFormatter.string(from: startdate)
+        })
+        
+        future = itemsFiltered.filter({ (act) -> Bool in
+            let startdate = Date.init(timeIntervalSince1970: TimeInterval(Double(act.startdate ?? "0")!))
+            return startdate > nowDate
+        })
+        
+        other = itemsFiltered.filter({ (act) -> Bool in
+            let startdate = Date.init(timeIntervalSince1970: TimeInterval(Double(act.startdate ?? "0")!))
+            return startdate < nowDate
+        })
+        
+//        for elem in self.itemsFiltered {
+//            let date = Date.init(timeIntervalSince1970: TimeInterval(Double(elem.startdate ?? "0")!))
+//            let dateFormatter = DateFormatter()
+//            dateFormatter.dateFormat = "dd.MM.yyyy"
+//            if dateFormatter.string(from: date) == dateFormatter.string(from: Date()) {
+//                today.append(elem)
+//            } else if dateFormatter.string(from: date) > dateFormatter.string(from: Date()) {
+//                future.append(elem)
+//            }else {
+//                other.append(elem)
+//            }
+//        }
+
+        if selectedType == .sport {
+            today = today.filter({ $0.mtype == 1 })
+            future = future.filter({ $0.mtype == 1 })
+            other = other.filter({ $0.mtype == 1 })
+        }else if selectedType == .NHL {
+            today = today.filter({ $0.mtype != 1 })
+            future = future.filter({ $0.mtype != 1 })
+            other = other.filter({ $0.mtype != 1 })
+        }
+        
         self.itemsSorted[0] = today
         self.itemsSorted[1] = future
         self.itemsSorted[2] = other
@@ -113,22 +161,29 @@ class EventsController: BaseViewController {
         filter3Button.selectedStyle(isSelected: false)
     }
     
+    @objc func handleRefresh(){
+        getItems(animation: false)
+    }
+    
     @objc func updateFilter(_ sender: EventsFilterButton) {
         if sender == filter1Button {
             filter1Button.selectedStyle(isSelected: true)
             filter2Button.selectedStyle(isSelected: false)
             filter3Button.selectedStyle(isSelected: false)
-            itemsFiltered = items
+            selectedType = .all
+//            itemsFiltered = items
         } else if sender == filter2Button {
             filter1Button.selectedStyle(isSelected: false)
             filter2Button.selectedStyle(isSelected: true)
             filter3Button.selectedStyle(isSelected: false)
-            itemsFiltered = itemsfilter1
+            selectedType = .sport
+//            itemsFiltered = itemsfilter1
         } else if sender == filter3Button {
             filter1Button.selectedStyle(isSelected: false)
             filter2Button.selectedStyle(isSelected: false)
             filter3Button.selectedStyle(isSelected: true)
-            itemsFiltered = itemsfilter2
+            selectedType = .NHL
+//            itemsFiltered = itemsfilter2
         }
         self.updateTable()
     }
@@ -234,9 +289,10 @@ extension EventsController: UITableViewDelegate, UITableViewDataSource {
     }
     
     @objc func showEventInfo(_ sender: EventCellButton) {
-        eventInfoController.event = itemsSorted[sender.indexSection][sender.indexRow]
-        eventInfoController.events = items
-        self.navigationController?.show(eventInfoController, sender: self)
+        let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "EventInfoController") as! EventInfoController
+        vc.event = itemsSorted[sender.indexSection][sender.indexRow]
+        vc.events = items
+        self.navigationController?.show(vc, sender: self)
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

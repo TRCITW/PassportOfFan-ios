@@ -23,8 +23,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         FirebaseApp.configure()
         Messaging.messaging().delegate = self
         Auth.auth().languageCode = "ru"
-        GMSServices.provideAPIKey("AIzaSyCIDGfxNaSEkadRtEibl5hiY3ciBkPi25M")
-        
+        GMSServices.provideAPIKey("AIzaSyCIDGfxNaSEkadRtEibl5hiY3ciBkPi25M")        
         
         let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
         

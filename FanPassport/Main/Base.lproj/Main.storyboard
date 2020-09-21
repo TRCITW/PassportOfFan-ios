@@ -324,7 +324,7 @@
                                         <color key="textColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.34901960780000002" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jQl-Hv-utX">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jQl-Hv-utX" customClass="GMSMapView">
                                         <rect key="frame" x="20" y="256" width="374" height="175"/>
                                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
@@ -442,7 +442,7 @@
                         <outlet property="eventTimeLabel" destination="udS-eE-8BX" id="XId-vh-dGk"/>
                         <outlet property="hLabel" destination="M5I-dv-eKq" id="wfV-Mf-uCm"/>
                         <outlet property="mLabel" destination="lRm-Fi-4Nl" id="WgX-Wp-iAX"/>
-                        <outlet property="mapView" destination="jQl-Hv-utX" id="hWe-iO-UKV"/>
+                        <outlet property="mapView" destination="jQl-Hv-utX" id="vTu-KZ-eJu"/>
                         <outlet property="sLabel" destination="j4c-Sz-9hb" id="lOG-5J-g1K"/>
                         <outlet property="timerStackView" destination="6Wx-Ds-aUb" id="Qoo-nH-QMT"/>
                     </connections>

@@ -21,6 +21,8 @@ class FirebaseAuthService {
             UserDefaults.standard.synchronize()
             completion(true, nil)
         } else {
+//            Auth.auth().settings?.isAppVerificationDisabledForTesting = true
+//            PhoneAuthProvider.provider(auth: Auth.auth())
             PhoneAuthProvider.provider().verifyPhoneNumber(phone, uiDelegate: nil) { verificationID, error in
                 guard error == nil else {
                     print(error ?? "error authorization")

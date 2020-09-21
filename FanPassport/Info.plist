@@ -29,6 +29,11 @@
 	</array>
 	<key>CFBundleVersion</key>
 	<string>1</string>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<string>googlechromes</string>
+		<string>comgooglemaps</string>
+	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSAppTransportSecurity</key>
@@ -57,6 +62,12 @@
 			</dict>
 		</dict>
 	</dict>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>$(PRODUCT_NAME) необходим доступ к вашей геолокации для учета времени нахождения на мероприях</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>$(PRODUCT_NAME) необходим доступ к вашей геолокации для учета времени нахождения на мероприях</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>$(PRODUCT_NAME) необходим доступ к вашей геолокации для учета времени нахождения на мероприях</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>SFProDisplay-Black.ttf</string>
@@ -94,16 +105,5 @@
 	</array>
 	<key>UIUserInterfaceStyle</key>
 	<string>Light</string>
-	<key>LSApplicationQueriesSchemes</key>
-	<array>
-		<string>googlechromes</string>
-		<string>comgooglemaps</string>
-	</array>
-	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-	<string>$(PRODUCT_NAME) необходим доступ к вашей геолокации для учета времени нахождения на мероприях</string>
-	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>$(PRODUCT_NAME) необходим доступ к вашей геолокации для учета времени нахождения на мероприях</string>
-	<key>NSLocationAlwaysUsageDescription</key>
-	<string>$(PRODUCT_NAME) необходим доступ к вашей геолокации для учета времени нахождения на мероприях</string>
 </dict>
 </plist>

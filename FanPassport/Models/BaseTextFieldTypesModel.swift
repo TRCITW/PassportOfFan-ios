@@ -18,7 +18,7 @@ enum BaseTextFieldType {
     
     var mask: String {
         switch self {
-        case .phone: return "(###)###-##-##"
+        case .phone: return " (###) ###-##-##"
         case .codeConfirm: return "######"
         default: return ""
         }

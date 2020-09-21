@@ -8,6 +8,7 @@ def shared_pods
     pod 'Firebase/Auth'
     pod 'Firebase/Messaging'
     pod 'SwiftMaskTextfield', :git => 'https://github.com/Twfik/swift-mask-textfield.git'
+    pod 'GooglePlaces'
     pod 'GoogleMaps'
 end
 

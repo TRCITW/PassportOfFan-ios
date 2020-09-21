@@ -27,6 +27,9 @@ class AuthController: AuthorisationBaseViewController {
         phoneNumberTextField.text = registeredPhone
         phoneNumberTextField.attributedPlaceholder = NSAttributedString(string: "+7",
                                                                         attributes: [NSAttributedString.Key.foregroundColor: UIColor.black])
+        #if DEBUG
+        phoneNumberTextField.text = "+79091234567"
+        #endif
     }
     
     func autorisation() {
