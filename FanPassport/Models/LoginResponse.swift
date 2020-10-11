@@ -25,3 +25,15 @@ class LoginResponse {
     }
 }
 
+
+class UserIssueResponse: Codable {
+    var status: Bool = false
+    init() {}
+    init(array: [[String: Any]]?) {
+        if let array = array, array.count > 0 {
+            if let status = array[0]["status"] as? Bool {
+                self.status = status
+            }
+        }
+    }
+}

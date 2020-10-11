@@ -57,6 +57,10 @@ class RegistrationController: AuthorisationBaseViewController {
         privacyLabelConfigure()
         policyConditionalLabelConfigure()
         userSubscribeLabelConfigure()
+        #if DEBUG
+        phoneTextField.text = "9235749076"
+//        phoneTextField.text = "9091234567"
+        #endif
     }
     
     @objc func privacyLabelTapped(_ gesture: UITapGestureRecognizer) {
@@ -156,12 +160,13 @@ class RegistrationController: AuthorisationBaseViewController {
         showProgressHUD()
         guard var phone = phoneTextField.text else { return }
         //phone = phone.replacingOccurrences(of: "+", with: "")
-        phone = phone.replacingOccurrences(of: "(", with: "")
-        phone = phone.replacingOccurrences(of: ")", with: "")
-        phone = phone.replacingOccurrences(of: "-", with: "")
+//        phone = phone.replacingOccurrences(of: "(", with: "")
+//        phone = phone.replacingOccurrences(of: ")", with: "")
+//        phone = phone.replacingOccurrences(of: "-", with: "")
+        phone = "+" + phone.digits
         GlobalConstants.apiService.postIsset(phone: phone) { result, data, error in
             if result {
-                if data?.success ?? false {
+                if data?.status ?? false {
                     self.hideProgressHUD()
                     self.alertView.registerButton.addTarget(self, action: #selector(self.goToAuth), for: .touchUpInside)
                     self.alertView.showAlert(caption: "Телефонный номер уже зарегистрирован.", info: "")
@@ -196,7 +201,10 @@ class RegistrationController: AuthorisationBaseViewController {
         self.alertView.registerButton.removeTarget(self, action: #selector(alertClose), for: .touchUpInside)
         let newVC = UIStoryboard(name: "Access", bundle: nil).instantiateViewController(withIdentifier: "AuthController") as! AuthController
         newVC.registeredPhone = self.phoneTextField.text ?? ""
-        self.navigationController?.show(newVC, sender: self)
+        let p = self.presentingViewController
+        self.dismiss(animated: true) {
+          p?.present(newVC, animated: true, completion: nil)
+        }
     }
 
     @IBAction func registrationButtonAction(_ sender: RedRoundedButton) {

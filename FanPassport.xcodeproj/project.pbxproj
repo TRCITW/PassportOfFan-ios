@@ -888,6 +888,7 @@
 				CODE_SIGN_ENTITLEMENTS = FanPassport/FanPassport.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 54Q5QYZ8FQ;
 				INFOPLIST_FILE = FanPassport/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -910,6 +911,7 @@
 				CODE_SIGN_ENTITLEMENTS = FanPassport/FanPassport.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 54Q5QYZ8FQ;
 				INFOPLIST_FILE = FanPassport/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (

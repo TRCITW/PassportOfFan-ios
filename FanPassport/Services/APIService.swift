@@ -111,6 +111,8 @@ class APIService {
                                   parameters: reqParams,
                                   encoding: JSONEncoding.default,
                                   headers: self.headers).validate().responseJSON { response in
+                                    
+                                    self.printResponse(response: response)
         
                                    switch response.result {
                                    case .success(let value):
@@ -161,6 +163,8 @@ class APIService {
                                   parameters: reqParams,
                                   encoding: JSONEncoding.default,
                                   headers: self.headers).validate().responseJSON { response in
+                                    
+                                    self.printResponse(response: response)
         
                                    switch response.result {
                                    case .success(_):
@@ -183,18 +187,20 @@ class APIService {
     }
     
     // MARK: - Проверка пользователя на существование
-    func postIsset(phone: String, completion: @escaping (Bool, LoginResponse?, ResponseError?)->()) {
+    func postIsset(phone: String, completion: @escaping (Bool, UserIssueResponse?, ResponseError?)->()) {
 
         self.requestManager.request(self.baseUrlString + "numisreg/" + phone.replacingOccurrences(of: "+", with: ""),
                                   method: .get,
                                   headers: self.headers).validate().responseJSON { response in
+                                    
+                                    self.printResponse(response: response)
         
                                    switch response.result {
                                    case .success(let value):
                                        if let code = response.response?.statusCode {
                                            switch code {
                                             case 200:
-                                               let obj = LoginResponse(dictionary: value as? [String : AnyObject] ?? [:])
+                                               let obj = UserIssueResponse(array: value as? [[String : Any]] )
                                                completion(true, obj, nil)
                                            
                                             case 401, 429:
@@ -225,6 +231,8 @@ class APIService {
                                   parameters: reqParams,
                                   encoding: JSONEncoding.default,
                                   headers: self.headers).validate().responseJSON { response in
+                                    
+                                   self.printResponse(response: response)
         
                                    switch response.result {
                                    case .success(_):
@@ -264,9 +272,7 @@ class APIService {
                                parameters: reqParams,
                                headers: headers).validate().responseJSON { response in
                                 
-                                if let data = response.data, let str = String(data: data, encoding: .utf8){
-                                    print(str)
-                                }
+                                self.printResponse(response: response)
 
                                 switch response.result {
                                 case .success(_):
@@ -295,6 +301,8 @@ class APIService {
         requestManager.request(baseUrlString + "actions/",
                                method: .get,
                                parameters: params).validate().responseJSON { response in
+                                
+                                self.printResponse(response: response)
 
                                 switch response.result {
                                 case .success(let value):
@@ -338,6 +346,8 @@ class APIService {
         requestManager.request(baseUrlString + "rating/",
                                method: .get,
                                parameters: params).validate().responseJSON { response in
+                                
+                                self.printResponse(response: response)
 
                                 switch response.result {
                                 case .success(let value):
@@ -373,6 +383,8 @@ class APIService {
                                method: .get,
                                parameters: params,
                                headers: headers).validate().responseJSON { response in
+                                
+                                self.printResponse(response: response)
 
                                 switch response.result {
                                 case .success(let value):
@@ -408,6 +420,8 @@ class APIService {
                                method: .get,
                                parameters: params,
                                headers: headers).validate().responseJSON { response in
+                                
+                                self.printResponse(response: response)
 
                                 switch response.result {
                                 case .success(let value):
@@ -464,4 +478,14 @@ class APIService {
         objError.messages = [errorMessage]
         return objError
     }
+    
+    private func printResponse(response: DataResponse<Any>?){
+        print(#function)
+        print(response?.request?.url)
+        print(response?.result)
+        if let data = response?.data, let str = String(data: data, encoding: .utf8){
+            print(str)
+        }
+    }
+    
 }
