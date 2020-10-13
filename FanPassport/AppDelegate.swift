@@ -61,11 +61,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         // Pass device token to auth.
         let firebaseAuth = Auth.auth()
         Messaging.messaging().apnsToken = deviceToken
-        #if DEBUG
-            firebaseAuth.setAPNSToken(deviceToken, type: AuthAPNSTokenType.sandbox)
-        #else
-            firebaseAuth.setAPNSToken(deviceToken, type: AuthAPNSTokenType.prod)
-        #endif
+//        #if DEBUG
+//            firebaseAuth.setAPNSToken(deviceToken, type: AuthAPNSTokenType.sandbox)
+//        #else
+//            firebaseAuth.setAPNSToken(deviceToken, type: AuthAPNSTokenType.prod)
+//        #endif
+        firebaseAuth.setAPNSToken(deviceToken, type: AuthAPNSTokenType.unknown)
     }
     
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
