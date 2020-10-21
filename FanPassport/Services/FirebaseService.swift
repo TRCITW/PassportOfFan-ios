@@ -31,7 +31,7 @@ class FirebaseAuthService {
                 }
                 
                 DispatchQueue.main.async {
-                    UserDefaults.standard.set(phone, forKey: UserKeys.phone.digits)
+                    UserDefaults.standard.set(phone.digits, forKey: UserKeys.phone)
                     UserDefaults.standard.set(verificationID, forKey: UserKeys.verificationID)
                     UserDefaults.standard.synchronize()
                     completion(true, nil)

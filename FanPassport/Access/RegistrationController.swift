@@ -59,7 +59,7 @@ class RegistrationController: AuthorisationBaseViewController {
         userSubscribeLabelConfigure()
         #if DEBUG
         phoneTextField.text = "9235749076"
-//        phoneTextField.text = "9091234567"
+        phoneTextField.text = "9235748071"
         #endif
     }
     

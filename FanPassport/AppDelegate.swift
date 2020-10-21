@@ -23,7 +23,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         FirebaseApp.configure()
         Messaging.messaging().delegate = self
         Auth.auth().languageCode = "ru"
-        GMSServices.provideAPIKey("AIzaSyCIDGfxNaSEkadRtEibl5hiY3ciBkPi25M")        
+        GMSServices.provideAPIKey("AIzaSyCGqLG5gWy3G1tpG1Dh5VeFfYLeH7CNYiU")        
         
         let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
         
@@ -54,6 +54,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             vc.modalPresentationStyle = .fullScreen
             window!.rootViewController = vc
         }
+        
+//        //убрать!
+//        UserDefaults.standard.set("+79235749076".digits, forKey: UserKeys.phone)
+//        GlobalConstants.apiService.getUser() { result, error in
+//            
+//        }
+        
+        
         return true
     }
     

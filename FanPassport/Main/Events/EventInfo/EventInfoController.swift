@@ -58,7 +58,7 @@ class EventInfoController: BaseViewController {
         super.viewDidLoad()
         UISettings()
         
-        locationManager.requestWhenInUseAuthorization()
+        locationManager.requestAlwaysAuthorization()
         locationManager.startMonitoringVisits ()
         if CLLocationManager.locationServicesEnabled() {
             locationManager.delegate = self
@@ -69,6 +69,7 @@ class EventInfoController: BaseViewController {
             locationManager.requestAlwaysAuthorization()
             locationManager.desiredAccuracy = kCLLocationAccuracyBest
             locationManager.startUpdatingLocation()
+            locationManager.allowsBackgroundLocationUpdates = true
         }
         
         let camera = GMSCameraPosition.camera(withLatitude: event.lat ?? 0, longitude: event.lon ?? 0, zoom: 14.0)
@@ -100,8 +101,8 @@ class EventInfoController: BaseViewController {
             }
         }
         
-//        event.startdate = "\("22:04 19.09.2020".toDate(format: "HH:mm dd.MM.yyyy")!.timeIntervalSince1970)"
-//        event.enddate = "\("22:57 19.09.2020".toDate(format: "HH:mm dd.MM.yyyy")!.timeIntervalSince1970)"
+        event.startdate = "\("20:04 20.10.2020".toDate(format: "HH:mm dd.MM.yyyy")!.timeIntervalSince1970)"
+        event.enddate = "\("10:54 21.10.2020".toDate(format: "HH:mm dd.MM.yyyy")!.timeIntervalSince1970)"
         
         let date = Date.init(timeIntervalSince1970: TimeInterval(Double(event.startdate ?? "0")!))
         let dateFormatter = DateFormatter()

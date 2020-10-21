@@ -28,7 +28,9 @@ class AuthController: AuthorisationBaseViewController {
         phoneNumberTextField.attributedPlaceholder = NSAttributedString(string: "+7",
                                                                         attributes: [NSAttributedString.Key.foregroundColor: UIColor.black])
         #if DEBUG
+        //https://smska.us
         phoneNumberTextField.text = "+79091234567"
+        phoneNumberTextField.text = "+79235749076"
         #endif
     }
     

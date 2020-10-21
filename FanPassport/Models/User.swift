@@ -27,7 +27,7 @@ class User {
     
     init() {}
     
-    init(dictionary: [String: AnyObject]) {
+    init(dictionary: [String: Any]) {
         id = dictionary["id"] as? Int
         lastname = dictionary["lastname"] as? String
         name = dictionary["name"] as? String

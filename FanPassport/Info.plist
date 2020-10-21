@@ -23,7 +23,7 @@
 			<string>Editor</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>com.googleusercontent.apps.141452601374-04bq1u8apqi91v5ficc0gcu086icb763</string>
+				<string>com.googleusercontent.apps.141452601374-umdi50prhrqt5vktsnim9ofpesoejare</string>
 			</array>
 		</dict>
 	</array>
@@ -80,7 +80,7 @@
 	</array>
 	<key>UIBackgroundModes</key>
 	<array>
-		<string>remote-notification</string>
+		<string>location</string>
 	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>

@@ -259,20 +259,30 @@ class APIService {
     // Отправка резуоттатов отсидки после окончания события, делается только 1 раз
     func postAddTime(idaction: Int, totaltime: Int, completion: @escaping (Bool, ResponseError?)->()) {
 
-        var reqParams = params
-        reqParams["idaction"] = idaction.description
-        reqParams["idfun"] = UserDefaults.standard.string(forKey: UserKeys.id)
-        reqParams["totaltime"] = totaltime.description
-        reqParams["phone"] = UserDefaults.standard.string(forKey: UserKeys.phone)
-        reqParams["imei"] = UserDefaults.standard.string(forKey: UserKeys.firebaseUID)
-        reqParams["token"] = UserDefaults.standard.string(forKey: UserKeys.firebaseUID)
+//        api/load/{event_id}/{user_id}/{result_time}/{phone}/{firebase_user_id}
 
-        requestManager.request(baseUrlString + "load/",
-                               method: .post,
+        
+        var newUrl = baseUrlString + "load/" + "\(idaction)/"
+        
+        newUrl += (UserDefaults.standard.string(forKey: UserKeys.id) ?? "") + "/"
+        newUrl += totaltime.description + "/"
+        newUrl += (UserDefaults.standard.string(forKey: UserKeys.phone) ?? "") + "/" + (UserDefaults.standard.string(forKey: UserKeys.firebaseUID) ?? "")
+        
+        var reqParams = params
+//        reqParams["idaction"] = idaction.description
+//        reqParams["idfun"] = UserDefaults.standard.string(forKey: UserKeys.id)
+//        reqParams["totaltime"] = totaltime.description
+//        reqParams["phone"] = UserDefaults.standard.string(forKey: UserKeys.phone)
+//        reqParams["imei"] = UserDefaults.standard.string(forKey: UserKeys.firebaseUID)
+//        reqParams["token"] = UserDefaults.standard.string(forKey: UserKeys.firebaseUID)
+
+        requestManager.request(newUrl,
+                               method: .get,
                                parameters: reqParams,
                                headers: headers).validate().responseJSON { response in
                                 
-                                self.printResponse(response: response)
+                                print(reqParams)
+                                self.printResponse(response: response)                                
 
                                 switch response.result {
                                 case .success(_):
@@ -428,16 +438,19 @@ class APIService {
                                     if let code = response.response?.statusCode {
                                         switch code {
                                          case 200:
-                                            let obj = User(dictionary: value as? [String : AnyObject] ?? [:])
-                                            UserDefaults.standard.set(obj.id, forKey: UserKeys.id)
-                                            UserDefaults.standard.set(obj.apiToken, forKey: UserKeys.apiToken)
-                                            UserDefaults.standard.set(obj.avatar, forKey: UserKeys.avatar)
-                                            UserDefaults.standard.set(obj.name, forKey: UserKeys.name)
-                                            UserDefaults.standard.set(obj.mail, forKey: UserKeys.email)
-                                            UserDefaults.standard.set(obj.lastname, forKey: UserKeys.surname)
-                                            UserDefaults.standard.set(obj.secondname, forKey: UserKeys.secondName)
-                                            UserDefaults.standard.set(obj.gender, forKey: UserKeys.sex)
-                                            UserDefaults.standard.synchronize()
+                                            if let list = value as? [[String : Any]], let dict = list.first {
+                                                let obj = User(dictionary: dict)
+                                                UserDefaults.standard.set(obj.id, forKey: UserKeys.id)
+                                                UserDefaults.standard.set(obj.apiToken, forKey: UserKeys.apiToken)
+                                                UserDefaults.standard.set(obj.avatar, forKey: UserKeys.avatar)
+                                                UserDefaults.standard.set(obj.name, forKey: UserKeys.name)
+                                                UserDefaults.standard.set(obj.mail, forKey: UserKeys.email)
+                                                UserDefaults.standard.set(obj.lastname, forKey: UserKeys.surname)
+                                                UserDefaults.standard.set(obj.secondname, forKey: UserKeys.secondName)
+                                                UserDefaults.standard.set(obj.gender, forKey: UserKeys.sex)
+                                                UserDefaults.standard.synchronize()
+                                            }
+
                                             if let img = UserDefaults.standard.string(forKey: UserKeys.avatar) {
                                                  self.setImageInCache(imageName: img){response in}
                                             }
