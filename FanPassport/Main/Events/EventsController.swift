@@ -276,7 +276,7 @@ extension EventsController: UITableViewDelegate, UITableViewDataSource {
         cell.eventDateLabel.text = dateFormatter.string(from: date)
         dateFormatter.dateFormat = "HH:mm"
         let startTime = dateFormatter.string(from: date)
-        let dateEnd = Date.init(timeIntervalSince1970: TimeInterval(Double(obj.startdate ?? "0")!))
+        let dateEnd = Date.init(timeIntervalSince1970: TimeInterval(Double(obj.enddate ?? "0")!))
         let endTime = dateFormatter.string(from: dateEnd)
         cell.eventTimeLabel.text = startTime + " - " + endTime
         cell.eventNameLabel.text = obj.name
