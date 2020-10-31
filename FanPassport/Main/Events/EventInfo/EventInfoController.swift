@@ -25,14 +25,14 @@ class EventInfoController: BaseViewController {
     @IBOutlet weak var mLabel: UILabel!
     @IBOutlet weak var sLabel: UILabel!
     
-    let locationManager = GlobalConstants.locationManager
-    var actionTimer = GlobalConstants.actionTimer
+//    let locationManager = GlobalConstants.locationManager
+//    var actionTimer = GlobalConstants.actionTimer
     var counter = 0
     let geoCoder = CLGeocoder()
-    var region: CLCircularRegion!
+//    var region: CLCircularRegion!
     var events = [Action]()
     var event = Action()
-    var counting = false
+//    var counting = false
     var eventStarted = false
     private var localTimer = Timer()
     
@@ -58,19 +58,19 @@ class EventInfoController: BaseViewController {
         super.viewDidLoad()
         UISettings()
         
-        locationManager.requestAlwaysAuthorization()
-        locationManager.startMonitoringVisits ()
-        if CLLocationManager.locationServicesEnabled() {
-            locationManager.delegate = self
-            if let radius = event.radius, let lat = event.lat, let lon = event.lon {
-            locationManager.distanceFilter = Double(radius)
-                region = CLCircularRegion(center: CLLocationCoordinate2D(latitude: lat, longitude: lon), radius: CLLocationDistance(radius), identifier: event.name ?? "")
-            }
-            locationManager.requestAlwaysAuthorization()
-            locationManager.desiredAccuracy = kCLLocationAccuracyBest
-            locationManager.startUpdatingLocation()
-            locationManager.allowsBackgroundLocationUpdates = true
-        }
+//        locationManager.requestAlwaysAuthorization()
+//        locationManager.startMonitoringVisits ()
+//        if CLLocationManager.locationServicesEnabled() {
+//            locationManager.delegate = self
+//            if let radius = event.radius, let lat = event.lat, let lon = event.lon {
+//            locationManager.distanceFilter = Double(radius)
+//                region = CLCircularRegion(center: CLLocationCoordinate2D(latitude: lat, longitude: lon), radius: CLLocationDistance(radius), identifier: event.name ?? "")
+//            }
+//            locationManager.requestAlwaysAuthorization()
+//            locationManager.desiredAccuracy = kCLLocationAccuracyBest
+//            locationManager.startUpdatingLocation()
+//            locationManager.allowsBackgroundLocationUpdates = true
+//        }
         
         let camera = GMSCameraPosition.camera(withLatitude: event.lat ?? 0, longitude: event.lon ?? 0, zoom: 14.0)
         mapView.animate(to: camera)
@@ -89,6 +89,44 @@ class EventInfoController: BaseViewController {
                 self.view.layoutIfNeeded()
             }
         }
+        if GeoService.shared.checkIsWatched(event: event) {
+            startWatching()
+            eventButton.isHidden = true
+            timerStackView.isHidden = false
+        }
+    }
+    
+    private func startWatching(){
+        GeoService.shared.starWatch(event: event)
+        GeoService.shared.actionHandler = { [weak self] item in
+            guard let self = self else { return }
+            let counter = item.event?.totaltime ?? 0
+            self.hLabel.text = "\(counter / 3600)"
+            self.mLabel.text = "\((counter % 3600) / 60)"
+            self.sLabel.text = "\((counter % 3600) % 60)"
+            if item.status == .end {
+                let seconds = item.event?.totaltime ?? 0
+                self.show(title: "Мероприятие завершилось", message: "Общее время пребывания на мероприятии составило: \(seconds / 3600) час : \((seconds % 3600) / 60) мин : \((seconds % 3600) % 60) сек")
+                self.showButton = false
+            }else if item.status == .pause {
+                self.show(title: "Вы покинули мероприятие", message: "Таймер остановлен. Для возобновления - вернитесь в зону мероприятия.", buttonText: "Ясно")
+            }
+        }
+        GeoService.shared.sentHandler = { [weak self] status, error in
+            guard let self = self else { return }
+            if status {
+                self.event.isSented = true
+                for (index, item) in self.events.enumerated() {
+                    if item.id == self.event.id {
+                       self.events[index] = self.event
+                    }
+                }
+//                UserDefaults.standard.set(self.events, forKey: UserKeys.actions)
+                UserDefaults.standard.synchronize()
+            }else{
+                self.show(title: NSLocalizedString("Get users list failed", comment: ""), error: ResponseError(dictionary: [:]))
+            }
+        }
     }
         
     func UISettings() {
@@ -101,8 +139,10 @@ class EventInfoController: BaseViewController {
             }
         }
         
+        print("lat ", event.lat)
+        print("lon ", event.lon)
 //        event.startdate = "\("20:04 20.10.2020".toDate(format: "HH:mm dd.MM.yyyy")!.timeIntervalSince1970)"
-//        event.enddate = "\("10:54 21.10.2020".toDate(format: "HH:mm dd.MM.yyyy")!.timeIntervalSince1970)"
+//        event.enddate = "\("22:45 31.10.2020".toDate(format: "HH:mm dd.MM.yyyy")!.timeIntervalSince1970)"
         
         let date = Date.init(timeIntervalSince1970: TimeInterval(Double(event.startdate ?? "0")!))
         let dateFormatter = DateFormatter()
@@ -129,8 +169,8 @@ class EventInfoController: BaseViewController {
             })
         }else{
             if dateEnd < Date() {
-                let seconds = event.totaltime ?? 0
-                self.show(title: "Мероприятие завершилось", message: "Общее время пребывания на мероприятии составило: \(seconds / 3600) час : \((seconds % 3600) / 60) мин : \((seconds % 3600) % 60) сек")
+//                let seconds = event.totaltime ?? 0
+//                self.show(title: "Мероприятие завершилось", message: "Общее время пребывания на мероприятии составило: \(seconds / 3600) час : \((seconds % 3600) / 60) мин : \((seconds % 3600) % 60) сек")
                 showButton = false
             } else if (event.getStarted ?? false) && (event.totaltime ?? 0) > 0 {
                 showButton = false
@@ -142,7 +182,7 @@ class EventInfoController: BaseViewController {
     }
     
     @IBAction func eventButtonAction(_ sender: Any) {
-        let dist = locationManager.location?.distance(from: CLLocation(latitude: event.lat ?? 0, longitude: event.lon ?? 0))
+        let dist = GeoService.shared.locationManager.location?.distance(from: CLLocation(latitude: event.lat ?? 0, longitude: event.lon ?? 0))
         if let radius = event.radius, radius >= Int(dist ?? 0) {
             startTimer()
             eventStarted = true
@@ -155,63 +195,66 @@ class EventInfoController: BaseViewController {
         super.alertClose()
     }
     
-    @objc func timerAction() {
-        if(counting) {
-            counter += 1
-        }
-        hLabel.text = "\(counter / 3600)"
-        mLabel.text = "\((counter % 3600) / 60)"
-        sLabel.text = "\((counter % 3600) % 60)"
-        let dist = locationManager.location?.distance(from: CLLocation(latitude: event.lat ?? 0, longitude: event.lon ?? 0))
-        if let radius = event.radius, radius < Int(dist ?? 0) {
-            self.show(title: "Вы покинули мероприятие", message: "Таймер остановлен. Для возобновления - вернитесь в зону мероприятия.", buttonText: "Ясно")
-            counting = false
-        }else{
-            counting = true
-        }
-        let dateEnd = Date.init(timeIntervalSince1970: TimeInterval(Double(event.enddate ?? "0")!))
-        if dateEnd < Date() {
-            let seconds = event.totaltime ?? 0
-            self.show(title: "Мероприятие завершилось", message: "Общее время пребывания на мероприятии составило: \(seconds / 3600) час : \((seconds % 3600) / 60) мин : \((seconds % 3600) % 60) сек", buttonText: "Ясно")
-            counting = false
-            eventStarted = false
-            actionTimer.invalidate()
-            sendTime()
-        }
-        
-        print(locationManager.location?.coordinate.latitude, locationManager.location?.coordinate.longitude, dist)
-    }
+//    @objc func timerAction() {
+//        if(counting) {
+//            counter += 1
+//        }
+//        hLabel.text = "\(counter / 3600)"
+//        mLabel.text = "\((counter % 3600) / 60)"
+//        sLabel.text = "\((counter % 3600) % 60)"
+//        let dist = GeoService.shared.locationManager.location?.distance(from: CLLocation(latitude: event.lat ?? 0, longitude: event.lon ?? 0))
+//        if let radius = event.radius, radius < Int(dist ?? 0) {
+//            self.show(title: "Вы покинули мероприятие", message: "Таймер остановлен. Для возобновления - вернитесь в зону мероприятия.", buttonText: "Ясно")
+//            counting = false
+//        }else{
+//            counting = true
+//        }
+//        let dateEnd = Date.init(timeIntervalSince1970: TimeInterval(Double(event.enddate ?? "0")!))
+//        if dateEnd < Date() {
+//            let seconds = event.totaltime ?? 0
+//            self.show(title: "Мероприятие завершилось", message: "Общее время пребывания на мероприятии составило: \(seconds / 3600) час : \((seconds % 3600) / 60) мин : \((seconds % 3600) % 60) сек", buttonText: "Ясно")
+//            counting = false
+//            eventStarted = false
+//            actionTimer.invalidate()
+//            sendTime()
+//        }
+//
+//        print(GeoService.shared.locationManager.location?.coordinate.latitude, GeoService.shared.locationManager.location?.coordinate.longitude, dist)
+//    }
 
     func startTimer() {
-        if !actionTimer.isValid {
-            counting = true
-            counter = event.totaltime ?? 0
-            actionTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(timerAction), userInfo: nil, repeats: true)
-            event.isSented = false
-        }
+        startWatching()
         eventButton.isHidden = true
         timerStackView.isHidden = false
+//        if !actionTimer.isValid {
+//            counting = true
+//            counter = event.totaltime ?? 0
+//            actionTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(timerAction), userInfo: nil, repeats: true)
+//            event.isSented = false
+//        }
+//        eventButton.isHidden = true
+//        timerStackView.isHidden = false
     }
 
-    private func sendTime(){
-        guard GlobalConstants.apiService.isInternetAvailable(vc: self) else { return }
-        GlobalConstants.apiService.postAddTime(idaction: event.id ?? 0, totaltime: counter) { result, error in
-            if result {
-                print("Time for \(self.event.name ?? "") is sented!")
-                self.event.isSented = true
-                for (index, item) in self.events.enumerated() {
-                    if item.id == self.event.id {
-                       self.events[index] = self.event
-                    }
-                }
-                UserDefaults.standard.set(self.events, forKey: UserKeys.actions)
-                UserDefaults.standard.synchronize()
-            } else if let error = error {
-                print(error)
-                self.show(title: NSLocalizedString("Get users list failed", comment: ""), error: error)
-            }
-        }
-    }
+//    private func sendTime(){
+//        guard GlobalConstants.apiService.isInternetAvailable(vc: self) else { return }
+//        GlobalConstants.apiService.postAddTime(idaction: event.id ?? 0, totaltime: counter) { result, error in
+//            if result {
+//                print("Time for \(self.event.name ?? "") is sented!")
+//                self.event.isSented = true
+//                for (index, item) in self.events.enumerated() {
+//                    if item.id == self.event.id {
+//                       self.events[index] = self.event
+//                    }
+//                }
+//                UserDefaults.standard.set(self.events, forKey: UserKeys.actions)
+//                UserDefaults.standard.synchronize()
+//            } else if let error = error {
+//                print(error)
+//                self.show(title: NSLocalizedString("Get users list failed", comment: ""), error: error)
+//            }
+//        }
+//    }
 }
 
 extension EventInfoController: GMSMapViewDelegate {
@@ -228,12 +271,12 @@ extension EventInfoController: CLLocationManagerDelegate {
 //                                              zoom: 5)
 //        mapView.animate(to: camera)
         
-        let dist = locationManager.location?.distance(from: CLLocation(latitude: event.lat ?? 0, longitude: event.lon ?? 0))
-        if let radius = event.radius, radius < Int(dist ?? 0) {
-            counting = true
-        }else{
-            counting = false
-        }
+//        let dist = GeoService.shared.locationManager.location?.distance(from: CLLocation(latitude: event.lat ?? 0, longitude: event.lon ?? 0))
+//        if let radius = event.radius, radius < Int(dist ?? 0) {
+//            counting = true
+//        }else{
+//            counting = false
+//        }
     }
     
     func locationManager(_ manager: CLLocationManager, didEnterRegion region: CLRegion) {
