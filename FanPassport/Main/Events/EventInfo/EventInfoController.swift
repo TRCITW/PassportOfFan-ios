@@ -18,6 +18,7 @@ class EventInfoController: BaseViewController {
     @IBOutlet weak var eventPlaceLabel: UILabel!
     @IBOutlet weak var eventInfoLabel: UILabel!
     @IBOutlet weak var mapView: GMSMapView!
+    var cirlce: GMSCircle!
     @IBOutlet weak var eventButton: RedRoundedButton!
     
     @IBOutlet weak var timerStackView: UIStackView!
@@ -72,10 +73,17 @@ class EventInfoController: BaseViewController {
 //            locationManager.allowsBackgroundLocationUpdates = true
 //        }
         
-        let camera = GMSCameraPosition.camera(withLatitude: event.lat ?? 0, longitude: event.lon ?? 0, zoom: 14.0)
+//        let camera = GMSCameraPosition.camera(withLatitude: event.lat ?? 0, longitude: event.lon ?? 0, zoom: 14.0)
+        let camera = GMSCameraPosition.camera(withLatitude: 50.1090217, longitude: 31.6754011, zoom: 14.0)
         mapView.animate(to: camera)
         mapView.isMyLocationEnabled = true
         mapView.delegate = self
+        
+        if let radius = event.radius {
+            cirlce = GMSCircle(position: camera.target, radius: CLLocationDistance(radius))
+            cirlce.fillColor = UIButton().titleLabel?.tintColor.withAlphaComponent(0.2)
+            cirlce.map = mapView
+        }
         
         eventPlaceLabel.text = ""
         let geocoder = GMSGeocoder()

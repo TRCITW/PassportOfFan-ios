@@ -96,8 +96,8 @@ extension RatingController: UITableViewDelegate, UITableViewDataSource {
         }
         let sname = obj.secondname == nil ? "" : (obj.secondname! + " ")
         let name = obj.name == nil ? "" : (obj.name! + " ")
-        let lname = obj.lastname == nil ? "" : obj.lastname!
-        cell.nameLabel.text = sname + name + lname
+        let lname = obj.lastname == nil ? "" : (obj.lastname! + " ")
+        cell.nameLabel.text = lname + name + sname
         cell.placeLabel.text = "\(indexPath.row + 1) место"
         cell.moneyLabel.text = secondsToHoursMinutesSeconds(seconds: obj.totaltime ?? 0)
         
