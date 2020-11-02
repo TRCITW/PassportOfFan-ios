@@ -73,8 +73,7 @@ class EventInfoController: BaseViewController {
 //            locationManager.allowsBackgroundLocationUpdates = true
 //        }
         
-//        let camera = GMSCameraPosition.camera(withLatitude: event.lat ?? 0, longitude: event.lon ?? 0, zoom: 14.0)
-        let camera = GMSCameraPosition.camera(withLatitude: 50.1090217, longitude: 31.6754011, zoom: 14.0)
+        let camera = GMSCameraPosition.camera(withLatitude: event.lat ?? 0, longitude: event.lon ?? 0, zoom: 14.0)
         mapView.animate(to: camera)
         mapView.isMyLocationEnabled = true
         mapView.delegate = self
