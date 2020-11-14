@@ -20,6 +20,7 @@ class RatingController: BaseViewController {
         super.viewDidLoad()
         UISettings()
         getItems()
+        NotificationCenter.default.addObserver(self, selector: #selector(getItems), name: Notification.Name(rawValue: "reloadRating"), object: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -35,6 +36,7 @@ class RatingController: BaseViewController {
         emptyView.isHidden = true
     }
     
+    @objc
     func getItems() {
         guard GlobalConstants.apiService.isInternetAvailable(vc: self) else { return }
         showProgressHUD()

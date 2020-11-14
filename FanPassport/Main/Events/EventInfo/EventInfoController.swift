@@ -53,8 +53,8 @@ class EventInfoController: BaseViewController {
             }
         }
     }
-        
-    
+
+    //MARK: -
     override func viewDidLoad() {
         super.viewDidLoad()
         UISettings()
@@ -106,6 +106,7 @@ class EventInfoController: BaseViewController {
     private func startWatching(){
         GeoService.shared.starWatch(event: event)
         GeoService.shared.actionHandler = { [weak self] item in
+            print(item.status)
             guard let self = self else { return }
             let counter = item.event?.totaltime ?? 0
             self.hLabel.text = "\(counter / 3600)"
@@ -117,6 +118,8 @@ class EventInfoController: BaseViewController {
                 self.showButton = false
             }else if item.status == .pause {
                 self.show(title: "Вы покинули мероприятие", message: "Таймер остановлен. Для возобновления - вернитесь в зону мероприятия.", buttonText: "Ясно")
+            }else{
+                self.alertClose()
             }
         }
         GeoService.shared.sentHandler = { [weak self] status, error in
@@ -130,6 +133,7 @@ class EventInfoController: BaseViewController {
                 }
 //                UserDefaults.standard.set(self.events, forKey: UserKeys.actions)
                 UserDefaults.standard.synchronize()
+                NotificationCenter.default.post(name: Notification.Name(rawValue: "reloadRating"), object: nil)
             }else{
                 self.show(title: NSLocalizedString("Get users list failed", comment: ""), error: ResponseError(dictionary: [:]))
             }
@@ -149,7 +153,7 @@ class EventInfoController: BaseViewController {
         print("lat ", event.lat)
         print("lon ", event.lon)
 //        event.startdate = "\("20:04 20.10.2020".toDate(format: "HH:mm dd.MM.yyyy")!.timeIntervalSince1970)"
-//        event.enddate = "\("22:45 31.10.2020".toDate(format: "HH:mm dd.MM.yyyy")!.timeIntervalSince1970)"
+//        event.enddate = "\("13:45 14.11.2020".toDate(format: "HH:mm dd.MM.yyyy")!.timeIntervalSince1970)"
         
         let date = Date.init(timeIntervalSince1970: TimeInterval(Double(event.startdate ?? "0")!))
         let dateFormatter = DateFormatter()

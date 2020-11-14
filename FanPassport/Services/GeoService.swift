@@ -77,6 +77,8 @@ class GeoService: NSObject {
         let dist = locationManager.location?.distance(from: CLLocation(latitude: item.event?.lat ?? 0, longitude: item.event?.lon ?? 0))
         if let radius = item.event?.radius, radius < Int(dist ?? 0) {
             item.status = .pause
+        }else{
+            item.status = .started
         }
         let dateEnd = Date.init(timeIntervalSince1970: TimeInterval(Double(item.event?.enddate ?? "0")!))
         if dateEnd < Date() {
