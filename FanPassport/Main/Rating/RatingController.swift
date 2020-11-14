@@ -16,11 +16,20 @@ class RatingController: BaseViewController {
     var items = [[Rating]]()
     var headers = ["ЛИДЕРЫ", "МОЙ РЕЙТИНГ"]
     
+    lazy var refreshControl: UIRefreshControl = {
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(handleRefresh), for: .valueChanged)
+        refreshControl.tintColor = UIColor.redRounded
+        
+        return refreshControl
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         UISettings()
         getItems()
         NotificationCenter.default.addObserver(self, selector: #selector(getItems), name: Notification.Name(rawValue: "reloadRating"), object: nil)
+        tableView.addSubview(refreshControl)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -37,10 +46,17 @@ class RatingController: BaseViewController {
     }
     
     @objc
+    func handleRefresh(){
+        getItems()
+    }
+    
+    @objc
     func getItems() {
+        print(#function)
         guard GlobalConstants.apiService.isInternetAvailable(vc: self) else { return }
         showProgressHUD()
         GlobalConstants.apiService.getRatings() { result, data, error in
+            self.refreshControl.endRefreshing()
             self.hideProgressHUD()
             if result, let users = data {
                 self.items.removeAll()
