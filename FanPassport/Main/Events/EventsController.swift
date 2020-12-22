@@ -149,8 +149,8 @@ class EventsController: BaseViewController {
     
     func setupFilter() {
         filter1Button.setTitle("Все", for: .normal)
-        filter2Button.setTitle("Спартакиада - Автоспорт", for: .normal)
-        filter3Button.setTitle("Ночная Хоккейная Лига", for: .normal)
+        filter2Button.setTitle("Спартакиада", for: .normal)
+        filter3Button.setTitle("НХЛ", for: .normal)
         
         filter1Button.addTarget(self, action:#selector(updateFilter), for: .touchUpInside)
         filter2Button.addTarget(self, action:#selector(updateFilter), for: .touchUpInside)
