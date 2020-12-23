@@ -1,0 +1,6 @@
+module Pods_FanPassport {
+  umbrella header "Pods-FanPassport-umbrella.h"
+
+  export *
+  module * { export * }
+}
