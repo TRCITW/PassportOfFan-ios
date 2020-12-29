@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1D83EEB46AD00CDED4ECCAD7 /* libPods-FanPassport.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D8018A5B982E9A562E471921 /* libPods-FanPassport.a */; };
+		1A553CFEB80EBE9547525263 /* libPods-FanPassport.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F85452B682D686FDFFAF5AA9 /* libPods-FanPassport.a */; };
 		8E09793D254D8D74003167D5 /* GeoService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E09793C254D8D74003167D5 /* GeoService.swift */; };
 		8E19CE282506A57B0021395B /* SBHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E19CE272506A57B0021395B /* SBHelper.swift */; };
 		DD32C14C23B9339600EA4DAE /* EventInfoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD32C14B23B9339600EA4DAE /* EventInfoController.swift */; };
@@ -113,12 +113,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		59C91D870A734A1540927DBD /* Pods-FanPassport.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FanPassport.release.xcconfig"; path = "Target Support Files/Pods-FanPassport/Pods-FanPassport.release.xcconfig"; sourceTree = "<group>"; };
+		2E8875B4D872459A10B52018 /* Pods-FanPassport.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FanPassport.debug.xcconfig"; path = "Target Support Files/Pods-FanPassport/Pods-FanPassport.debug.xcconfig"; sourceTree = "<group>"; };
+		3B15E506FBAB1290909B2AF9 /* Pods-FanPassport.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FanPassport.release.xcconfig"; path = "Target Support Files/Pods-FanPassport/Pods-FanPassport.release.xcconfig"; sourceTree = "<group>"; };
 		8E09793C254D8D74003167D5 /* GeoService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeoService.swift; sourceTree = "<group>"; };
 		8E19CE272506A57B0021395B /* SBHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SBHelper.swift; sourceTree = "<group>"; };
 		8E1FF2742516767F0061E75E /* FanPassport.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = FanPassport.entitlements; sourceTree = "<group>"; };
-		C5908D08CA0195C5BD365EE1 /* Pods-FanPassport.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FanPassport.debug.xcconfig"; path = "Target Support Files/Pods-FanPassport/Pods-FanPassport.debug.xcconfig"; sourceTree = "<group>"; };
-		D8018A5B982E9A562E471921 /* libPods-FanPassport.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-FanPassport.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DD32C14B23B9339600EA4DAE /* EventInfoController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventInfoController.swift; sourceTree = "<group>"; };
 		DD32C14E23B9388F00EA4DAE /* InfoAlertView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfoAlertView.swift; sourceTree = "<group>"; };
 		DD32C14F23B9388F00EA4DAE /* InfoAlertView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InfoAlertView.xib; sourceTree = "<group>"; };
@@ -223,6 +222,7 @@
 		DDDD3DE0239EBABF00C262DC /* SFProDisplay-Semibold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SFProDisplay-Semibold.ttf"; sourceTree = "<group>"; };
 		DDDD3DE1239EBABF00C262DC /* SFProDisplay-Heavy.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SFProDisplay-Heavy.ttf"; sourceTree = "<group>"; };
 		DDF37A7023B63AC0004153A7 /* EventsFilterButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsFilterButton.swift; sourceTree = "<group>"; };
+		F85452B682D686FDFFAF5AA9 /* libPods-FanPassport.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-FanPassport.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -230,28 +230,28 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1D83EEB46AD00CDED4ECCAD7 /* libPods-FanPassport.a in Frameworks */,
+				1A553CFEB80EBE9547525263 /* libPods-FanPassport.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3DA6218C02C12519DD5A4330 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				F85452B682D686FDFFAF5AA9 /* libPods-FanPassport.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		894D312769B4E9027A460268 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				C5908D08CA0195C5BD365EE1 /* Pods-FanPassport.debug.xcconfig */,
-				59C91D870A734A1540927DBD /* Pods-FanPassport.release.xcconfig */,
+				2E8875B4D872459A10B52018 /* Pods-FanPassport.debug.xcconfig */,
+				3B15E506FBAB1290909B2AF9 /* Pods-FanPassport.release.xcconfig */,
 			);
 			path = Pods;
-			sourceTree = "<group>";
-		};
-		C4E3ED7A9295F28B2EA2A27B /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				D8018A5B982E9A562E471921 /* libPods-FanPassport.a */,
-			);
-			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		DD32C14A23B9336500EA4DAE /* EventInfo */ = {
@@ -366,7 +366,7 @@
 				DDDD3D55239E98B800C262DC /* FanPassport */,
 				DDDD3D54239E98B800C262DC /* Products */,
 				894D312769B4E9027A460268 /* Pods */,
-				C4E3ED7A9295F28B2EA2A27B /* Frameworks */,
+				3DA6218C02C12519DD5A4330 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -518,11 +518,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = DDDD3D67239E98C300C262DC /* Build configuration list for PBXNativeTarget "FanPassport" */;
 			buildPhases = (
-				0FB136F4150CE504E6761982 /* [CP] Check Pods Manifest.lock */,
+				36518B05DFB9FD597D395DD5 /* [CP] Check Pods Manifest.lock */,
 				DDDD3D4F239E98B800C262DC /* Sources */,
 				DDDD3D50239E98B800C262DC /* Frameworks */,
 				DDDD3D51239E98B800C262DC /* Resources */,
-				DAE49C73D0306933F696167C /* [CP] Copy Pods Resources */,
+				EEAE0A668328780057622072 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -618,7 +618,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		0FB136F4150CE504E6761982 /* [CP] Check Pods Manifest.lock */ = {
+		36518B05DFB9FD597D395DD5 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -640,7 +640,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		DAE49C73D0306933F696167C /* [CP] Copy Pods Resources */ = {
+		EEAE0A668328780057622072 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -886,7 +886,7 @@
 		};
 		DDDD3D68239E98C300C262DC /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = C5908D08CA0195C5BD365EE1 /* Pods-FanPassport.debug.xcconfig */;
+			baseConfigurationReference = 2E8875B4D872459A10B52018 /* Pods-FanPassport.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = FanPassport/FanPassport.entitlements;
@@ -909,7 +909,7 @@
 		};
 		DDDD3D69239E98C300C262DC /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 59C91D870A734A1540927DBD /* Pods-FanPassport.release.xcconfig */;
+			baseConfigurationReference = 3B15E506FBAB1290909B2AF9 /* Pods-FanPassport.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = FanPassport/FanPassport.entitlements;

@@ -31,6 +31,7 @@ class AuthController: AuthorisationBaseViewController {
         //https://smska.us
         phoneNumberTextField.text = "+79091234567"
         phoneNumberTextField.text = "+79235749076"
+        phoneNumberTextField.text = GlobalConstants.testPhone
         #endif
     }
     

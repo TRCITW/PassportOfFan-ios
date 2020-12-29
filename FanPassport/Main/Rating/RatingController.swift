@@ -15,6 +15,8 @@ class RatingController: BaseViewController {
     let emptyView = EmptyView()
     var items = [[Rating]]()
     var headers = ["ЛИДЕРЫ", "МОЙ РЕЙТИНГ"]
+    private var myPlace: Int = 0
+    private let ownId = Int(UserDefaults.standard.string(forKey: UserKeys.id) ?? "0") ?? 0
     
     lazy var refreshControl: UIRefreshControl = {
         let refreshControl = UIRefreshControl()
@@ -55,12 +57,21 @@ class RatingController: BaseViewController {
         print(#function)
         guard GlobalConstants.apiService.isInternetAvailable(vc: self) else { return }
         showProgressHUD()
-        GlobalConstants.apiService.getRatings() { result, data, error in
-            self.refreshControl.endRefreshing()
-            self.hideProgressHUD()
-            if result, let users = data {
+       
+        GlobalConstants.apiService.getRatings() { [weak self] result, data, error in
+            self?.refreshControl.endRefreshing()
+            self?.hideProgressHUD()
+            guard let self = self else {return}
+            if result, var users = data {
                 self.items.removeAll()
-                self.items.append(users.sorted(by: { ($0.totaltime ?? 0) > ($1.totaltime ?? 0) }))
+                if let first = users.firstIndex(where: { $0.idfun == self.ownId }) {
+                    let user = users[first]
+//                    users.remove(at: first)
+                    self.items.append(users.sorted(by: { ($0.totaltime ?? 0) > ($1.totaltime ?? 0) }))
+                    self.items.append([user])
+                }else{
+                    self.items.append(users.sorted(by: { ($0.totaltime ?? 0) > ($1.totaltime ?? 0) }))
+                }
                 self.tableView.reloadData()
             } else if let error = error {
                 print(error)
@@ -116,22 +127,39 @@ extension RatingController: UITableViewDelegate, UITableViewDataSource {
         let name = obj.name == nil ? "" : (obj.name! + " ")
         let lname = obj.lastname == nil ? "" : (obj.lastname! + " ")
         cell.nameLabel.text = lname + name + sname
-        cell.placeLabel.text = "\(indexPath.row + 1) место"
+        
+        if obj.idfun == ownId {
+            if myPlace == 0 {
+               myPlace = indexPath.row + 1
+            }
+            cell.placeLabel.text = "\(myPlace) место"
+        }else{
+           cell.placeLabel.text = "\(indexPath.row + 1) место"
+        }
+        
         cell.moneyLabel.text = secondsToHoursMinutesSeconds(seconds: obj.totaltime ?? 0)
         
         switch indexPath.row + 1 {
             case 1:
-                cell.medalImage.image = UIImage(named: "medalGold.png")
+                cell.medalImage.image = UIImage(named: "icons8-gold-medal 1")
             case 2:
-                cell.medalImage.image = UIImage(named: "medalSilver.png")
+                cell.medalImage.image = UIImage(named: "icons8-silver-medal 1")
             case 3:
-                cell.medalImage.image = UIImage(named: "medalBronze.png")
+                cell.medalImage.image = UIImage(named: "icons8-bronze-medal 1")
             default:
                 cell.medalImage.isHidden = true
         }
     
         
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        let obj = items[indexPath.section][indexPath.row]
+        if obj.idfun == ownId && indexPath.section == 0  {
+            return 0
+        }
+        return 98
     }
     
     func secondsToHoursMinutesSeconds (seconds : Int) -> (String) {
