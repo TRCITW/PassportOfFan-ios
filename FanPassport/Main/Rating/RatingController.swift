@@ -132,6 +132,7 @@ extension RatingController: UITableViewDelegate, UITableViewDataSource {
             if myPlace == 0 {
                myPlace = indexPath.row + 1
             }
+            cell.medalImage.isHidden = myPlace > 2 ? true : false
             cell.placeLabel.text = "\(myPlace) место"
         }else{
            cell.placeLabel.text = "\(indexPath.row + 1) место"
@@ -156,7 +157,7 @@ extension RatingController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         let obj = items[indexPath.section][indexPath.row]
-        if obj.idfun == ownId && indexPath.section == 0  {
+        if (obj.idfun == ownId && indexPath.section == 0) || indexPath.row > 2 {
             return 0
         }
         return 98
