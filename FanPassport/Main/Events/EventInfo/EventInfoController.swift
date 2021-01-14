@@ -153,10 +153,10 @@ class EventInfoController: BaseViewController {
             }
         }
         
-        print("lat ", event.lat)
-        print("lon ", event.lon)
-        event.startdate = "\("20:04 20.10.2020".toDate(format: "HH:mm dd.MM.yyyy")!.timeIntervalSince1970)"
-        event.enddate = "\("21:10 27.12.2020".toDate(format: "HH:mm dd.MM.yyyy")!.timeIntervalSince1970)"
+//        print("lat ", event.lat)
+//        print("lon ", event.lon)
+//        event.startdate = "\("20:04 20.10.2020".toDate(format: "HH:mm dd.MM.yyyy")!.timeIntervalSince1970)"
+//        event.enddate = "\("21:10 27.12.2020".toDate(format: "HH:mm dd.MM.yyyy")!.timeIntervalSince1970)"
         
         let date = Date.init(timeIntervalSince1970: TimeInterval(Double(event.startdate ?? "0")!))
         let dateFormatter = DateFormatter()
