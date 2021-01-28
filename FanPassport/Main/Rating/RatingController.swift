@@ -140,6 +140,7 @@ extension RatingController: UITableViewDelegate, UITableViewDataSource {
         
         cell.moneyLabel.text = secondsToHoursMinutesSeconds(seconds: obj.totaltime ?? 0)
         
+        cell.medalImage.isHidden = false
         switch indexPath.row + 1 {
             case 1:
                 cell.medalImage.image = UIImage(named: "icons8-gold-medal 1")
@@ -150,7 +151,11 @@ extension RatingController: UITableViewDelegate, UITableViewDataSource {
             default:
                 cell.medalImage.isHidden = true
         }
-    
+        
+        //костыль
+        if obj.idfun == ownId {
+            cell.medalImage.isHidden = myPlace > 2 ? true : false
+        }
         
         return cell
     }
